@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -12,6 +12,14 @@ const initialState = {
   user: {},
 };
 
+
+export const signUp = createAsyncThunk(
+  'auth/signUp',
+  async ({email,password}, {dispatch}) => {
+    return createUserWithEmailAndPassword(auth, email, password)
+  }
+)
+
 export const uiSlice = createSlice({
   name: 'auth',
   initialState,
@@ -19,10 +27,10 @@ export const uiSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
-    signUp: (state,action) => {
-      const {email, password} = action.payload
-      return createUserWithEmailAndPassword(auth, email, password)
-    },
+    // signUp: (state,action) => {
+    //   const {email, password} = action.payload
+    //   return createUserWithEmailAndPassword(auth, email, password)
+    // },
     logOut: () => {
       return signOut(auth)
     },signIn: (state,action) => {
@@ -36,6 +44,6 @@ export const uiSlice = createSlice({
   },
 });
 
-export const { setUser, signUp, logOut,unsubscribe,signIn } = uiSlice.actions;
+export const { setUser, logOut,unsubscribe,signIn } = uiSlice.actions;
 
 export default uiSlice.reducer;
