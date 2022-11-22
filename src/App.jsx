@@ -1,13 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Account from './Pages/Account'
 import Home from './Pages/Home'
 import Login from './Pages/Login'
+import ProtectedRoute from './Pages/ProtectedRoute'
 import Signup from './Pages/Signup'
+import { unsubscribe } from './slices/authSlice';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(unsubscribe())
+  },);
 
   return (
     <>
@@ -16,7 +24,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
-        <Route path='/account' element={<Account/>}/>
+        <Route path='/account' element={<ProtectedRoute><Account/></ProtectedRoute>}/>
       </Routes>
     </>
   )
