@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {FaHeart, FaRegHeart} from 'react-icons/fa'
-import { db } from '../firebase';
+import { db } from '../../firebase';
 import {arrayUnion, doc, updateDoc} from'firebase/firestore'
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { setMovieBottom, setMovieHeight, setMovieLeft, setMovieRight, setMovieTop, setMovieWidth, setShowPreviewModal } from '../../slices/previewModalSlice';
 
 
 const Movie = ({item}) => {
   const [like, setLike] = useState(false);
   const [saved, setSaved] = useState(false);
   const user = useSelector(state => state.auth.user, shallowEqual);
+  const dispatch = useDispatch();
+  const movie = useRef();
+
 
   const movieID = doc(db,'users', `${user?.email}`)
   const saveShow = async () => {
@@ -28,8 +32,23 @@ const Movie = ({item}) => {
     }
   }
 
+  const onMouseOver = () => {
+    dispatch(setMovieTop(movie.current.getBoundingClientRect().top))
+    dispatch(setMovieLeft(movie.current.getBoundingClientRect().left))
+    dispatch(setMovieRight(movie.current.getBoundingClientRect().right))
+    dispatch(setMovieBottom(movie.current.getBoundingClientRect().bottom))
+    dispatch(setMovieWidth(movie.current.getBoundingClientRect().width))
+    dispatch(setMovieHeight(movie.current.getBoundingClientRect().height))
+    dispatch(setShowPreviewModal(true))
+    console.log(movie.current.getBoundingClientRect())
+  }
+
   return (
-    <div className='w-[50%] sm:w-[calc(100%/3)] lg:w-[25%] xl:w-[20%] 2xl:w-[calc(100%/6)] inline-block cursor-pointer relative px-1'>
+    <div
+      onMouseOver={onMouseOver}
+      ref={movie}
+      className='w-[50%] sm:w-[calc(100%/3)] lg:w-[25%] xl:w-[20%] 2xl:w-[calc(100%/6)] inline-block cursor-pointer relative px-1'
+    >
       <img className='w-full h-auto block rounded-md' src={`https://image.tmdb.org/t/p/w500${item?.backdrop_path}`} alt={item.title} />
       <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white'>
         <p className='white-space-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-center'>

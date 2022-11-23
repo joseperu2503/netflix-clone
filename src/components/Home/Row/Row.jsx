@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
-import Movie from '../../Movie';
+import Movie from '../Movie';
 import { Link } from 'react-router-dom';
 import ArrowLeft from './ArrowLeft';
 import ArrowRigth from './ArrowRigth';

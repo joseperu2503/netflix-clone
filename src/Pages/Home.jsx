@@ -1,8 +1,9 @@
 import React from 'react'
-import Navbar from '../components/Browse/NavBar'
-import Main from '../components/Browse/Main'
-import Row from '../components/Browse/Row/Row'
+import Navbar from '../components/Home/NavBar'
+import Main from '../components/Home/Main'
+import Row from '../components/Home/Row/Row'
 import requests from '../Request'
+import PreviewModal from '../components/PreviewModal'
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       <Row title='Top Rated' fetchURL={requests.requestTopRated}/>
       <Row title='Horror' fetchURL={requests.requestHorror}/>
 
+      <PreviewModal/>
     </>
   )
 }
