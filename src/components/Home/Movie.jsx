@@ -4,9 +4,9 @@ import { db } from '../../firebase';
 import {arrayUnion, doc, updateDoc} from'firebase/firestore'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { setMovie, setMovieBottom, setMovieHeight, setMovieLeft, setMovieRight, setMovieTop, setMovieWidth, setShowPreviewModal } from '../../slices/previewModalSlice';
+import TopIndex from '../../Icons/Top/TopIndex';
 
-
-const Movie = ({item}) => {
+const Movie = ({item, isTop = false, index}) => {
   const [like, setLike] = useState(false);
   const [saved, setSaved] = useState(false);
   const user = useSelector(state => state.auth.user, shallowEqual);
@@ -53,6 +53,7 @@ const Movie = ({item}) => {
             width: moviePosition.width,
             height: moviePosition.height,
           },
+          isTop: isTop,
           ...item
         }))
         dispatch(setShowPreviewModal(true))
@@ -74,7 +75,15 @@ const Movie = ({item}) => {
       ref={movie}
       className='w-[50%] sm:w-[calc(100%/3)] lg:w-[25%] xl:w-[20%] 2xl:w-[calc(100%/6)] inline-block cursor-pointer relative px-1'
     >
+      {isTop ?
+      <div className='pb-[75%] relative rounded-md'>
+        <div className='absolute h-full w-[50%]  left-0'><TopIndex index={index}/></div>
+        <img className='absolute top-0 bottom-0 right-0 w-[50%] h-full object-cover rounded-r-md' src={`https://image.tmdb.org/t/p/w500${item?.poster_path}`} alt="" />
+      </div>
+      :
       <img className='w-full h-auto block rounded-md' src={`https://image.tmdb.org/t/p/w500${item?.backdrop_path}`} alt={item.title} />
+      }
+
       {/* <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white'>
         <p className='white-space-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-center'>
           {item?.title}

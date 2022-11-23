@@ -55,7 +55,7 @@ const PreviewModal = () => {
   return (
     showPreviewModal &&
     <div
-      className={`px-1 absolute duration-400  overflow-y-hidden  ${hidden ? 'scale-100 ' : 'scale-150' }`}
+      className={`px-1 absolute duration-400  overflow-y-hidden  ${hidden ? 'scale-100 ' + (movie?.isTop && 'opacity-0') : 'scale-150' }`}
       onTransitionEnd={onAnimationEnd}
       onClick={() => setCounter(2)}
       onMouseLeave={onMouseLeave}

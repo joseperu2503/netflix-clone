@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ArrowLeft from './ArrowLeft';
 import ArrowRigth from './ArrowRigth';
 
-const Row = ({title, fetchURL}) => {
+const Row = ({title, fetchURL, isTop = false}) => {
   const [movies, setMovies] = useState([]);
   const slider = useRef();
   const [showLeftArrow, setShowLeftArrow] = useState(false);
@@ -60,9 +60,15 @@ const Row = ({title, fetchURL}) => {
         { showLeftArrow && <ArrowLeft onClick={slideLeft}/>}
 
         <div className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide px-12" ref={slider}>
-          {movies.map((item,id) => (
-            <Movie item={item} key={id}/>
-          ))}
+
+          {
+            movies.map((item,index) => {
+              if((isTop && index < 10) || !isTop){
+                return <Movie item={item} isTop={isTop} index={index+1} key={index}/>
+              }
+            })
+          }
+
         </div>
 
         { showRigth && <ArrowRigth onClick={slideRigth}/>}
