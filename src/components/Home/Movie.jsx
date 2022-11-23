@@ -3,7 +3,7 @@ import {FaHeart, FaRegHeart} from 'react-icons/fa'
 import { db } from '../../firebase';
 import {arrayUnion, doc, updateDoc} from'firebase/firestore'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { setMovieBottom, setMovieHeight, setMovieLeft, setMovieRight, setMovieTop, setMovieWidth, setShowPreviewModal } from '../../slices/previewModalSlice';
+import { setMovie, setMovieBottom, setMovieHeight, setMovieLeft, setMovieRight, setMovieTop, setMovieWidth, setShowPreviewModal } from '../../slices/previewModalSlice';
 
 
 const Movie = ({item}) => {
@@ -37,13 +37,26 @@ const Movie = ({item}) => {
     hover.current = true
     setTimeout(() => {
       if(hover.current){
-        dispatch(setMovieTop(movie.current.getBoundingClientRect().top))
-        dispatch(setMovieLeft(movie.current.getBoundingClientRect().left))
-        dispatch(setMovieRight(movie.current.getBoundingClientRect().right))
-        dispatch(setMovieBottom(movie.current.getBoundingClientRect().bottom))
-        dispatch(setMovieWidth(movie.current.getBoundingClientRect().width))
-        dispatch(setMovieHeight(movie.current.getBoundingClientRect().height))
+        const moviePosition = movie.current.getBoundingClientRect()
+        // dispatch(setMovieTop(movie.current.getBoundingClientRect().top))
+        // dispatch(setMovieLeft(movie.current.getBoundingClientRect().left))
+        // dispatch(setMovieRight(movie.current.getBoundingClientRect().right))
+        // dispatch(setMovieBottom(movie.current.getBoundingClientRect().bottom))
+        // dispatch(setMovieWidth(movie.current.getBoundingClientRect().width))
+        // dispatch(setMovieHeight(movie.current.getBoundingClientRect().height))
+        dispatch(setMovie({
+          position : {
+            top: moviePosition.top,
+            left: moviePosition.left,
+            right: moviePosition.right,
+            bottom: moviePosition.bottom,
+            width: moviePosition.width,
+            height: moviePosition.height,
+          },
+          ...item
+        }))
         dispatch(setShowPreviewModal(true))
+
         console.log(movie.current.getBoundingClientRect())
       }
 
@@ -62,14 +75,14 @@ const Movie = ({item}) => {
       className='w-[50%] sm:w-[calc(100%/3)] lg:w-[25%] xl:w-[20%] 2xl:w-[calc(100%/6)] inline-block cursor-pointer relative px-1'
     >
       <img className='w-full h-auto block rounded-md' src={`https://image.tmdb.org/t/p/w500${item?.backdrop_path}`} alt={item.title} />
-      <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white'>
+      {/* <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white'>
         <p className='white-space-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-center'>
           {item?.title}
         </p>
         <p onClick={saveShow}>
           {like ? <FaHeart className='absolute top-4 left-4 text-gray-300'/> : <FaRegHeart className='absolute top-4 left-4 text-gray-300'/>}
         </p>
-      </div>
+      </div> */}
     </div>
   )
 }

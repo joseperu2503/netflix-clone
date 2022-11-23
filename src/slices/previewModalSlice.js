@@ -7,7 +7,8 @@ const initialState = {
   movieRight: 0,
   movieBottom: 0,
   movieWidth: 0,
-  movieHeight: 0
+  movieHeight: 0,
+  movie: {}
 };
 
 export const previewModalSlice = createSlice({
@@ -35,9 +36,12 @@ export const previewModalSlice = createSlice({
     setMovieHeight: (state, action) => {
       state.movieHeight = action.payload;
     },
+    setMovie: (state, action) => {
+      state.movie = action.payload;
+    },
   },
 });
 
-export const { setShowPreviewModal, setMovieTop, setMovieLeft, setMovieRight, setMovieBottom, setMovieWidth, setMovieHeight } = previewModalSlice.actions;
+export const { setShowPreviewModal, setMovieTop, setMovieLeft, setMovieRight, setMovieBottom, setMovieWidth, setMovieHeight, setMovie } = previewModalSlice.actions;
 
 export default previewModalSlice.reducer;
