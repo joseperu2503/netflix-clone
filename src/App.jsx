@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Account from './Pages/Account'
-import Home from './Pages/Home'
+import Browse from './Pages/Browse'
 import Login from './Pages/Login'
 import ProtectedRoute from './Pages/ProtectedRoute'
 import Signup from './Pages/Signup'
@@ -19,9 +19,9 @@ function App() {
 
   return (
     <>
-      <Navbar/>
+      {/* <Navbar/> */}
       <Routes>
-        <Route path='/' element={<Home/>}/>
+        <Route path='/' element={<Browse/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/account' element={<ProtectedRoute><Account/></ProtectedRoute>}/>

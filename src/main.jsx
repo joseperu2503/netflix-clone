@@ -9,6 +9,11 @@ import thunk from 'redux-thunk'
 import rootReducer from './reducers/rootReducer'
 import { applyMiddleware, compose, legacy_createStore as createStore } from 'redux'
 
+import './fonts/NetflixSansLight.otf';
+import './fonts//NetflixSansRegular.otf';
+import './fonts/NetflixSansMedium.otf';
+import './fonts/NetflixSansBold.otf';
+
 const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const composeEnhacers = composeAlt(applyMiddleware(thunk))
 const store = createStore(rootReducer, composeEnhacers)

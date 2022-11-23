@@ -1,4 +1,5 @@
 import React from 'react'
+import Navbar from '../components/Browse/NavBar'
 import Main from '../components/Main'
 import Row from '../components/Row'
 import requests from '../Request'
@@ -6,6 +7,7 @@ import requests from '../Request'
 const Home = () => {
   return (
     <>
+      <Navbar/>
       <Main/>
       <Row title='Up Coming' fetchURL={requests.requestUpcoming}/>
       <Row title='Popular' fetchURL={requests.requestPopular}/>
