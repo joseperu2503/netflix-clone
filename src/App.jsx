@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Account from './Pages/Account'
 import Home from './Pages/Home'
+import Index from './Pages/Index'
 import Login from './Pages/Login'
 import ProtectedRoute from './Pages/ProtectedRoute'
 import Signup from './Pages/Signup'
@@ -21,7 +22,8 @@ function App() {
     <>
       {/* <Navbar/> */}
       <Routes>
-        <Route path='/' element={<Home/>}/>
+        <Route path='/' element={<Index/>}/>
+        <Route path='/Browser' element={<ProtectedRoute><Home/></ProtectedRoute>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/account' element={<ProtectedRoute><Account/></ProtectedRoute>}/>

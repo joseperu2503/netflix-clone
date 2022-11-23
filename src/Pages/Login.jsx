@@ -17,7 +17,7 @@ const Login = () => {
     setError('')
     try {
       await dispatch(login({email: email, password: password})).unwrap()
-      navigate('/')
+      navigate('/browser')
     } catch (error) {
       console.log(error)
       setError(error.message)

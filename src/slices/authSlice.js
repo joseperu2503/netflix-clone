@@ -10,7 +10,7 @@ import { auth, db } from '../firebase'
 import {doc, setDoc} from'firebase/firestore'
 
 const initialState = {
-  user: {},
+  user: null,
 };
 
 export const signUp = createAsyncThunk(

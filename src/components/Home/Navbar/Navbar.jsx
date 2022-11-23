@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
-import { logOut } from '../../slices/authSlice';
+import { logOut } from '../../../slices/authSlice';
 import { Icon } from '@iconify/react';
-import SearchIcon from '../../Icons/Search';
-import NotificationIcon from '../../Icons/Notification';
-
+import SearchIcon from '../../../Icons/Search';
+import NotificationIcon from '../../../Icons/Notification';
+import AccountIcon from './Account/Account';
 
 const Navbar = () => {
   const user = useSelector(state => state.auth.user, shallowEqual);
@@ -61,9 +61,7 @@ const Navbar = () => {
           <div className='text-white flex items-center'>
             <NotificationIcon/>
           </div>
-          <div className='flex items-center'>
-            <img className='h-8 w-8 rounded' src="https://occ-0-2865-2433.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdYJV5wt63AcxNaDoqDXUhqZb55oN5Dxt1m-Zdn_z5rn_hIq9m8dA8JB2xdcPmrY3yXnlVWYKPXnOrbv2QN4aEVU28dESJg.png?r=1d4" alt="" />
-          </div>
+          <AccountIcon/>
         </div>
       </div>
     </div>
