@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { shallowEqual, useSelector } from 'react-redux';
-import { keyframes } from "styled-components";
-
+import React, { useEffect, useState } from 'react'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { setShowPreviewModal } from '../../slices/previewModalSlice';
+import './index.css'
 
 
 const PreviewModal = () => {
@@ -13,10 +13,8 @@ const PreviewModal = () => {
   const movieWidth = useSelector(state => state.previewModal.movieWidth, shallowEqual);
   const movieHeight = useSelector(state => state.previewModal.movieHeight, shallowEqual);
 
-  var spin = keyframes`
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  `;
+  const dispatch = useDispatch();
+  const [hidden, setHidden] = useState(true);
   const style = {
     top: movieTop+window.scrollY,
     left: movieLeft,
@@ -24,14 +22,41 @@ const PreviewModal = () => {
     // bottom: movieBottom
     width: movieWidth,
     height: movieHeight,
-    animation: `${spin} 2s linear infinite`
   }
+
+  const onMouseLeave = () => {
+    setHidden(true)
+    // setTimeout(() => {
+    //   dispatch(setShowPreviewModal(false))
+    //   // setHidden(false)
+    // }, 400);
+  }
+  const onAnimationEnd = () => {
+    console.log('end transition')
+    if(hidden){
+      dispatch(setShowPreviewModal(false))
+      // setHidden(false)
+    }
+  }
+
+  useEffect(() => {
+    if(showPreviewModal){
+      setHidden(false)
+    }
+  }, [showPreviewModal]);
+
   console.log(movieTop)
   // console.log('window.scrollY',window.scrollY)
   const [counter, setCounter] = useState(0);
   return (
     showPreviewModal &&
-    <div className={`bg-white absolute duration-700`} onClick={() => setCounter(2)} style={style}>
+    <div
+      className={`bg-white absolute duration-400  ${hidden ? 'scale-100' : 'scale-150' }`}
+      onTransitionEnd={onAnimationEnd}
+      onClick={() => setCounter(2)}
+      onMouseLeave={onMouseLeave}
+      style={style}
+    >
 
     </div>
   )

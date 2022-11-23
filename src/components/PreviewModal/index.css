@@ -1,0 +1,25 @@
+@keyframes scale-appear {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.5);
+  }
+}
+
+@keyframes scale-vanish {
+  from {
+    transform: scale(1.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.appear {
+  animation: scale-appear linear 0.25s forwards;
+}
+
+.vanish {
+  animation: scale-vanish linear 0.25s forwards;
+}

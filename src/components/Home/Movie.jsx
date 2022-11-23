@@ -12,6 +12,7 @@ const Movie = ({item}) => {
   const user = useSelector(state => state.auth.user, shallowEqual);
   const dispatch = useDispatch();
   const movie = useRef();
+  const hover = useRef(false);
 
 
   const movieID = doc(db,'users', `${user?.email}`)
@@ -33,19 +34,30 @@ const Movie = ({item}) => {
   }
 
   const onMouseOver = () => {
-    dispatch(setMovieTop(movie.current.getBoundingClientRect().top))
-    dispatch(setMovieLeft(movie.current.getBoundingClientRect().left))
-    dispatch(setMovieRight(movie.current.getBoundingClientRect().right))
-    dispatch(setMovieBottom(movie.current.getBoundingClientRect().bottom))
-    dispatch(setMovieWidth(movie.current.getBoundingClientRect().width))
-    dispatch(setMovieHeight(movie.current.getBoundingClientRect().height))
-    dispatch(setShowPreviewModal(true))
-    console.log(movie.current.getBoundingClientRect())
+    hover.current = true
+    setTimeout(() => {
+      if(hover.current){
+        dispatch(setMovieTop(movie.current.getBoundingClientRect().top))
+        dispatch(setMovieLeft(movie.current.getBoundingClientRect().left))
+        dispatch(setMovieRight(movie.current.getBoundingClientRect().right))
+        dispatch(setMovieBottom(movie.current.getBoundingClientRect().bottom))
+        dispatch(setMovieWidth(movie.current.getBoundingClientRect().width))
+        dispatch(setMovieHeight(movie.current.getBoundingClientRect().height))
+        dispatch(setShowPreviewModal(true))
+        console.log(movie.current.getBoundingClientRect())
+      }
+
+    }, 500);
+  }
+
+  const onMouseLeave = () => {
+    hover.current = false
   }
 
   return (
     <div
       onMouseOver={onMouseOver}
+      onMouseLeave={onMouseLeave}
       ref={movie}
       className='w-[50%] sm:w-[calc(100%/3)] lg:w-[25%] xl:w-[20%] 2xl:w-[calc(100%/6)] inline-block cursor-pointer relative px-1'
     >
