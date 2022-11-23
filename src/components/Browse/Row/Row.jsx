@@ -49,6 +49,7 @@ const Row = ({title, fetchURL}) => {
     // console.log('scrollWidth', slider.current.scrollWidth)
   }
 
+  console.log('clientWidth', slider?.current?.scrollLeft)
   return (
     <div className='relative my-10'>
       <h2 className='text-white mb-2'>

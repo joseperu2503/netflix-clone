@@ -27,7 +27,7 @@ const Main = () => {
   return (
     <div className='w-full h-[56.25vw] text-white absolute'>
       <div className='w-full h-full'>
-        <div className='absolute'>
+        <div className='absolute w-full'>
           <img className='w-full h-full object-cover' src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`} alt={movie?.title} />
           <div className='absolute top-0 left-0 bottom-0 right-[26.09%] bg-gradient-to-r from-black'></div>
           <div className='absolute top-auto left-0 bottom-0 right-0 h-[14.7vw] bg-gradient-banner-bottom'></div>
