@@ -5,6 +5,10 @@ import Arrow from '../Icons/Arrow'
 import Navbar from '../components/Index/Navbar';
 import Banner from '../components/Index/Banner';
 import Enjoy from '../components/Index/Enjoy';
+import Download from '../components/Index/Download';
+import Watch from '../components/Index/Watch';
+import Create from '../components/Index/Create';
+import Questions from '../components/Index/Questions';
 
 const Index = () => {
   return (
@@ -13,6 +17,10 @@ const Index = () => {
       <div>
         <Banner/>
         <Enjoy/>
+        <Download/>
+        <Watch/>
+        <Create/>
+        <Questions/>
       </div>
     </div>
   )
