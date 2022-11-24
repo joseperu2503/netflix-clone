@@ -19,7 +19,8 @@ module.exports = {
         'gradient-header' : 'linear-gradient(180deg,rgba(0,0,0,.7) 10%,transparent)',
         'gradient-banner-bottom' : 'linear-gradient(180deg,hsla(0,0%,8%,0) 0,hsla(0,0%,8%,.15) 15%,hsla(0,0%,8%,.35) 29%,hsla(0,0%,8%,.58) 44%,#141414 68%,#141414)',
         'image-banner-index' : 'linear-gradient(0deg,rgba(0,0,0,.8) 0,transparent 60%,rgba(0,0,0,.8));',
-        'button-get-started' : 'linear-gradient(180deg,#e50914,#db0510);'
+        'button-get-started' : 'linear-gradient(180deg,#e50914,#db0510);',
+        'gradient-header-login' :'linear-gradient(180deg,rgba(0,0,0,.5) 0,transparent);'
       },
       colors: {
       }
