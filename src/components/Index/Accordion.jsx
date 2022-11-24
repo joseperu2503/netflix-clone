@@ -41,7 +41,7 @@ const Accordion = () => {
   return (
     <ul className='my-12 w-3/4 max-w-4xl'>
       {items.map( (item, index) => (
-        <li className='w-full mb-2'>
+        <li className='w-full mb-2' key={index}>
           <button
             onClick={() => toggle(index)}
             className='px-8 py-5 bg-neutral-700 w-full text-left text-2xl font-medium mb-px flex items-center justify-between'>
@@ -49,9 +49,9 @@ const Accordion = () => {
             <CloseIcon className={`h-5 w-5 fill-white duration-200 ${selected != index && 'rotate-45'}`}/>
           </button>
           <div className={`bg-neutral-700 overflow-hidden ${selected == index ? 'max-h-[1200px]':'max-h-0'}`} style={{transition: 'max-height .25s cubic-bezier(.5,0,.1,1)'}}>
-            <span className='p-8 text-2xl font-medium inline-block'>
-              {item.answer.map((answer, index) =>{ return (<>{ index > 0 && <><br/><br/></>} {answer}</>)})}
-            </span>
+            <p className='p-8 text-2xl font-medium inline-block'>
+              {item.answer.map((answer, index) =>{ return (<span key={index}>{ index > 0 && <><br/><br/></>} {answer}</span>)})}
+            </p>
           </div>
         </li>
       ))}
